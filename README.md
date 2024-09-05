@@ -1,2 +1,2 @@
-# HFpager-collector
+# HFpager-reaper
 HFpager message collector for bots
