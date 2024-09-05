@@ -25,13 +25,13 @@ async def normal_handler(event):
 
     mess_date=event.message.to_dict()['date']
 
-    f.write(mess_date.strftime("%d-%m-%Y %H:%M")+"\n")
-    f.write(user+"\n")
-    f.write(user_mess+"\n\n")
+    f.write(mess_date.strftime('%d-%m-%Y %H:%M')+'\n')
+    f.write(str(user_id)+' ('+user+')\n')
+    f.write(user_mess+'\n\n')
 
     f.flush()
-    print(mess_date.strftime("%d-%m-%Y %H:%M"))
-    print(user)
+    print(mess_date.strftime('%d-%m-%Y %H:%M'))
+    print(str(user_id)+' ('+user+')')
     print(user_mess)
     print()
 
@@ -46,13 +46,13 @@ async def normal_handler(event):
 
     mess_date=event.message.to_dict()['date']
 
-    f.write(mess_date.strftime("%d-%m-%Y %H:%M")+"\n")
-    f.write(user+"\n")
-    f.write(user_mess+"\n\n")
+    f.write(mess_date.strftime('%d-%m-%Y %H:%M')+'\n')
+    f.write(str(user_id)+' ('+user+')\n')
+    f.write(user_mess+'\n\n')
 
     f.flush()
-    print(mess_date.strftime("%d-%m-%Y %H:%M"))
-    print(user)
+    print(mess_date.strftime('%d-%m-%Y %H:%M'))
+    print(str(user_id)+' ('+user+')')
     print(user_mess)
     print()
 
@@ -64,10 +64,10 @@ participants = client.get_participants(group)
 users={}
 
 for partic in client.iter_participants(group):
-    lastname=""
+    lastname=''
     if partic.last_name:
        lastname=partic.last_name
-    users[partic.id]=partic.first_name+" "+lastname
+    users[partic.id]=partic.first_name+' '+lastname
 
 f=open('messages_from_chat', 'a') 
 
