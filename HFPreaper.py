@@ -1,11 +1,13 @@
+#!/usr/bin/env python3
 import os
 from dotenv import load_dotenv
-
 from telethon import TelegramClient, sync, events
+from pprint import pformat,pprint
 
-from pprint import pformat
+from regexps import msg_parse
 
 load_dotenv()
+
 
 
 SESSION = os.getenv('SESSION')
@@ -35,7 +37,8 @@ async def normal_handler(event):
     print(mess_date.strftime('%d-%m-%Y %H:%M'))
     print(str(user_id)+' ('+user+')')
     print(user_mess)
-    print()
+    pprint(msg_parse(user_mess))
+    
 
 @client.on(events.MessageEdited(chats=(NVIS_CHAT,)))
 async def normal_handler(event):
@@ -57,7 +60,7 @@ async def normal_handler(event):
     print(mess_date.strftime('%d-%m-%Y %H:%M'))
     print(str(user_id)+' ('+user+')')
     print(user_mess)
-    print()
+    pprint(msg_parse(user_mess))
 
 client.start()
 
