@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 from telethon import TelegramClient, sync, events
 
+from pprint import pformat
 
 load_dotenv()
 
@@ -16,7 +17,7 @@ client = TelegramClient(SESSION, APP_API_ID, APP_API_HASH)
 
 @client.on(events.NewMessage(chats=(NVIS_CHAT,)))
 async def normal_handler(event):
-#    print(event.message)
+    # print(event.message)
     user_mess=event.message.to_dict()['message']
 
     s_user_id=event.message.to_dict()['from_id']
@@ -25,11 +26,12 @@ async def normal_handler(event):
 
     mess_date=event.message.to_dict()['date']
 
+    f.write(pformat(event.message.to_dict())+'\n')
     f.write(mess_date.strftime('%d-%m-%Y %H:%M')+'\n')
     f.write(str(user_id)+' ('+user+')\n')
     f.write(user_mess+'\n\n')
-
     f.flush()
+
     print(mess_date.strftime('%d-%m-%Y %H:%M'))
     print(str(user_id)+' ('+user+')')
     print(user_mess)
@@ -37,7 +39,7 @@ async def normal_handler(event):
 
 @client.on(events.MessageEdited(chats=(NVIS_CHAT,)))
 async def normal_handler(event):
-#    print(event.message)
+    # print(event.message)
     user_mess=event.message.to_dict()['message']
 
     s_user_id=event.message.to_dict()['from_id']
@@ -46,11 +48,12 @@ async def normal_handler(event):
 
     mess_date=event.message.to_dict()['date']
 
+    f.write(pformat(event.message.to_dict())+'\n')
     f.write(mess_date.strftime('%d-%m-%Y %H:%M')+'\n')
     f.write(str(user_id)+' ('+user+')\n')
     f.write(user_mess+'\n\n')
-
     f.flush()
+
     print(mess_date.strftime('%d-%m-%Y %H:%M'))
     print(str(user_id)+' ('+user+')')
     print(user_mess)
@@ -64,10 +67,9 @@ participants = client.get_participants(group)
 users={}
 
 for partic in client.iter_participants(group):
-    lastname=''
+    users[partic.id]=partic.first_name
     if partic.last_name:
-       lastname=partic.last_name
-    users[partic.id]=partic.first_name+' '+lastname
+        users[partic.id]=partic.first_name+' '+partic.last_name
 
 f=open('messages_from_chat', 'a') 
 
