@@ -161,7 +161,27 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# === Project specific ===
+
+# Telethon session
 *.session
 *.session-journal
+
+# Data directory (logs, session)
+data/
+
+# Old log format (deprecated)
 messages_from_chat
+
+# Linux background run
 nohup.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
